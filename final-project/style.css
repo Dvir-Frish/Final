@@ -1,0 +1,224 @@
+h1 {
+  align-items: center;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 50px;
+}
+body {
+  background-color: aqua;
+}
+footer {
+  background-color: brown;
+  margin: 0%;
+  padding: 0%;
+  position: absolute;
+  bottom: 0%;
+  font-size: 100px;
+  width: 100%;
+  height: 10px;
+}
+.dot {
+  height: 7%;
+  width: 3%;
+
+  border-radius: 50%;
+  display: inline-block;
+}
+.rectangle {
+  position: absolute;
+  height: 25px;
+  width: 20px;
+  display: inline-block;
+}
+.Lleg {
+  height: 3.4%;
+  width: 1.4%;
+  background-color: green;
+  left: 4.35%;
+  bottom: 1.3%;
+}
+.Rleg {
+  height: 3.4%;
+  width: 1.4%;
+  background-color: green;
+  left: 5.95%;
+  bottom: 1.3%;
+}
+.score {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+}
+.highST {
+  background-color: green;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  border: 2px solid black;
+  padding: 4px;
+}
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 30px solid #555;
+}
+@keyframes LlegJ {
+  25% {
+    bottom: 11.3%;
+  }
+
+  /* 25% {
+    background-color: rgb(32, 235, 76);
+  }
+  50% {
+    background-color: rgb(179, 15, 15);
+  } */
+  75% {
+    bottom: 1.3%;
+  }
+}
+@keyframes RlegJ {
+  25% {
+    bottom: 11.3%;
+  }
+
+  /* 25% {
+    background-color: rgb(32, 235, 76);
+  }
+  50% {
+    background-color: rgb(179, 15, 15);
+  } */
+  75% {
+    bottom: 1.3%;
+  }
+}
+.head {
+  position: absolute;
+  left: 4.4%;
+  bottom: 10%;
+  background-color: #ffb6c1;
+  /* animation: infinite;
+  animation-name: headJump;
+  animation-duration: 4s; */
+}
+.shirt {
+  height: 6.2%;
+  width: 3%;
+  position: absolute;
+  left: 4.4%;
+  bottom: 4.7%;
+  background-color: #0f1cd2;
+  /* animation-name: shirtJump;
+  animation-duration: 4s; */
+}
+@keyframes shirtJump {
+  25% {
+    bottom: 14.7%;
+  }
+
+  /* 25% {
+    background-color: rgb(32, 235, 76);
+  }
+  50% {
+    background-color: rgb(179, 15, 15);
+  } */
+  75% {
+    bottom: 4.7%;
+  }
+}
+.playAgain {
+  width: auto;
+  height: auto;
+  border: 2px solid gray;
+  background-color: gainsboro;
+  margin: 20px;
+  padding: 5px;
+  font-size: 220%;
+  position: absolute;
+  left: 43%;
+  align-items: center;
+  bottom: 50%;
+}
+.hidden {
+  display: none;
+}
+.spike {
+  position: absolute;
+  left: 50%;
+  bottom: 1.3%;
+}
+.spikeMoveEZ {
+  animation: infinite;
+  animation-name: spikeMoveEZ;
+  animation-duration: 10s;
+}
+.spikeMoveMD {
+  animation: infinite;
+  animation-name: spikeMoveMD;
+  animation-duration: 10s;
+}
+.spikeMoveAH {
+  animation: infinite;
+  animation-name: spikeMoveAH;
+  animation-duration: 10s;
+}
+@keyframes spikeMoveEZ {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -10%;
+  }
+}
+@keyframes spikeMoveMD {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -50%;
+  }
+}
+@keyframes spikeMoveAH {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+.shirtJ {
+  animation: infinite;
+  animation-name: shirtJump;
+  animation-duration: 2s;
+}
+.headJ {
+  animation: infinite;
+  animation-name: headJump;
+  animation-duration: 2s;
+}
+.LlegJ {
+  animation: infinite;
+  animation-name: LlegJ;
+  animation-duration: 2s;
+}
+.RlegJ {
+  animation: infinite;
+  animation-name: RlegJ;
+  animation-duration: 2s;
+}
+@keyframes headJump {
+  25% {
+    bottom: 20%;
+  }
+  /* 25% {
+    bottom: 8%;
+  }
+  50% {
+    bottom: 8.3%;
+  } */
+  75% {
+    bottom: 10%;
+  }
+}
