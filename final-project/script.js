@@ -2,7 +2,8 @@ const shirt = document.querySelector(".shirt");
 const head = document.querySelector(".head");
 const Lleg = document.querySelector(".Lleg");
 const Rleg = document.querySelector(".Rleg");
-const spike = document.querySelector(".spike");
+const spike1 = document.querySelector("#S1");
+const spike2 = document.querySelector("#S2");
 const scoreE = document.querySelector(".score");
 const highScoreE = document.querySelector(".highSN");
 const playAgain = document.querySelector(".playAgain");
@@ -13,29 +14,51 @@ let score = 0;
 let highScore = 0;
 const body = document.querySelector("body");
 setInterval(spikeSM, 10);
-spike.classList.remove("spikeMoveEZ");
+spike1.classList.remove("spikeMoveEZ");
+spike2.classList.remove("spikeMoveEZ");
 if (levelSL === 1) {
-  spike.classList.add("spikeMoveEZ");
+  setInterval(scoreUp, 300);
+  spike1.classList.add("spikeMoveEZ");
+  spike2.classList.add("spikeMoveEZ");
 } else if (levelSL === 2) {
-  spike.classList.add("spikeMoveMD");
+  spike1.classList.add("spikeMoveMD");
+  spike2.classList.add("spikeMoveMD");
+
+  setInterval(scoreUp, 120);
 } else {
-  spike.classList.add("spikeMoveAH");
+  spike1.classList.add("spikeMoveAH");
+  spike2.classList.add("spikeMoveAH");
+
+  setInterval(scoreUp, 70);
 }
 function spikeSM() {
   if (checkSPM) {
-    if (spike.getBoundingClientRect().left < 0) {
+    if (
+      spike1.getBoundingClientRect().left < 0 ||
+      spike2.getBoundingClientRect().left < 0
+    ) {
       levelSL = Math.trunc(Math.random() * 3) + 1;
       if (levelSL === 1) {
-        spike.classList.remove("spikeMoveEZ");
+        spike1.classList.remove("spikeMoveEZ");
+        spike2.classList.remove("spikeMoveEZ");
+
+        console.log("1");
+        clearInterval(scoreUp, 300);
         setTimeout(sSEZ, 10);
         console.log("ez");
 
         console.log(levelSL);
       } else if (levelSL === 2) {
-        spike.classList.remove("spikeMoveMD");
+        spike1.classList.remove("spikeMoveMD");
+        console.log("2");
+        clearInterval(scoreUp, 60);
         setTimeout(sSMD, 10);
       } else {
-        spike.classList.remove("spikeMoveAH");
+        spike1.classList.remove("spikeMoveAH");
+        spike2.classList.remove("spikeMoveAH");
+
+        console.log("3");
+        clearInterval(scoreUp, 12);
         setTimeout(sSAH, 10);
       }
       checkSPM = false;
@@ -43,17 +66,23 @@ function spikeSM() {
   }
 }
 function sSEZ() {
-  spike.classList.add("spikeMoveEZ");
+  spike1.classList.add("spikeMoveEZ");
+  spike2.classList.add("spikeMoveEZ");
+
   console.log(levelSL);
   checkSPM = true;
 }
 function sSMD() {
-  spike.classList.add("spikeMoveMD");
+  spike1.classList.add("spikeMoveMD");
+  spike2.classList.add("spikeMoveMD");
+
   console.log(levelSL);
   checkSPM = true;
 }
 function sSAH() {
-  spike.classList.add("spikeMoveAH");
+  spike1.classList.add("spikeMoveAH");
+  spike2.classList.add("spikeMoveAH");
+
   console.log(levelSL);
   checkSPM = true;
 }
@@ -70,7 +99,6 @@ if (gameOn) {
   });
 }
 setInterval(touchCheck, 10);
-setInterval(scoreUp, 100);
 function scoreUp() {
   if (gameOn) {
     score++;
@@ -85,7 +113,7 @@ function endJump() {
 }
 function touchCheck() {
   if (gameOn) {
-    if (touches(Rleg, spike)) {
+    if (touches(Rleg, spike1) || touches(Rleg, spike2)) {
       gameOn = false;
       body.style.backgroundColor = "#FF0000";
       playAgain.classList.remove("hidden");
@@ -112,19 +140,26 @@ function startGame() {
   body.style.backgroundColor = "#00FFFF";
   gameOn = true;
   if (levelSL === 1) {
-    spike.classList.add("spikeMoveEZ");
+    spike1.classList.add("spikeMoveEZ");
+    spike2.classList.add("spikeMoveEZ");
   } else if (levelSL === 2) {
-    spike.classList.add("spikeMoveMD");
+    spike1.classList.add("spikeMoveMD");
+    spike2.classList.add("spikeMoveMD");
   } else {
-    spike.classList.add("spikeMoveAH");
+    spike1.classList.add("spikeMoveAH");
+    spike2.classList.add("spikeMoveAH");
   }
 }
 function resetScore() {
+  console.log("resetScore");
   score = 0;
   scoreE.textContent = 0;
-  spike.classList.remove("spikeMoveEZ");
-  spike.classList.remove("spikeMoveMD");
-  spike.classList.remove("spikeMoveAH");
+  spike1.classList.remove("spikeMoveEZ");
+  spike1.classList.remove("spikeMoveMD");
+  spike1.classList.remove("spikeMoveAH");
+  spike2.classList.remove("spikeMoveEZ");
+  spike2.classList.remove("spikeMoveMD");
+  spike2.classList.remove("spikeMoveAH");
   levelSL = Math.trunc(Math.random() * 3) + 1;
   setInterval(playAG, 10);
 }
