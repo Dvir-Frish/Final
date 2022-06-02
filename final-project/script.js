@@ -8,170 +8,201 @@ const scoreE = document.querySelector(".score");
 const highScoreE = document.querySelector(".highSN");
 const playAgain = document.querySelector(".playAgain");
 let gameOn = true;
-let checkSPM = true;
-let levelSL = Math.trunc(Math.random() * 3) + 1;
 let score = 0;
 let highScore = 0;
+let stopSV = false;
 const body = document.querySelector("body");
-setInterval(spikeSM, 10);
-spike1.classList.remove("spikeMoveEZ");
-spike2.classList.remove("spikeMoveEZ");
-if (levelSL === 1) {
-  setInterval(scoreUp, 300);
-  spike1.classList.add("spikeMoveEZ");
-  spike2.classList.add("spikeMoveEZ");
-} else if (levelSL === 2) {
-  spike1.classList.add("spikeMoveMD");
-  spike2.classList.add("spikeMoveMD");
-
-  setInterval(scoreUp, 120);
-} else {
-  spike1.classList.add("spikeMoveAH");
-  spike2.classList.add("spikeMoveAH");
-
-  setInterval(scoreUp, 70);
-}
-function spikeSM() {
-  if (checkSPM) {
-    if (
-      spike1.getBoundingClientRect().left < 0 ||
-      spike2.getBoundingClientRect().left < 0
-    ) {
-      levelSL = Math.trunc(Math.random() * 3) + 1;
-      if (levelSL === 1) {
-        spike1.classList.remove("spikeMoveEZ");
-        spike2.classList.remove("spikeMoveEZ");
-
-        console.log("1");
-        clearInterval(scoreUp, 300);
-        setTimeout(sSEZ, 10);
-        console.log("ez");
-
-        console.log(levelSL);
-      } else if (levelSL === 2) {
-        spike1.classList.remove("spikeMoveMD");
-        console.log("2");
-        clearInterval(scoreUp, 60);
-        setTimeout(sSMD, 10);
-      } else {
-        spike1.classList.remove("spikeMoveAH");
-        spike2.classList.remove("spikeMoveAH");
-
-        console.log("3");
-        clearInterval(scoreUp, 12);
-        setTimeout(sSAH, 10);
-      }
-      checkSPM = false;
+function middleHide() {
+  for (const x of spike1.classList) {
+    if (x == "spikeMoveEZ" || x == "spikeMoveMD" || x == "spikeMoveAH") {
+      spike1.classList.remove("hidden");
+    } else {
+      spike1.classList.add("hidden");
+    }
+  }
+  for (const y of spike2.classList) {
+    if (y == "spikeMoveEZ" || y == "spikeMoveMD" || y == "spikeMoveAH") {
+      spike2.classList.remove("hidden");
+      console.log("1");
+    } else {
+      spike2.classList.add("hidden");
+      console.log("2");
     }
   }
 }
-function sSEZ() {
-  spike1.classList.add("spikeMoveEZ");
-  spike2.classList.add("spikeMoveEZ");
-
-  console.log(levelSL);
-  checkSPM = true;
+function stopS() {
+  for (let i = 0; i < 100; i++) {
+    spike1.classList.remove("spikeMoveEZ");
+    spike1.classList.remove("spikeMoveMD");
+    spike1.classList.remove("spikeMoveAH");
+    spike2.classList.remove("spikeMoveEZ");
+    spike2.classList.remove("spikeMoveMD");
+    spike2.classList.remove("spikeMoveAH");
+  }
 }
-function sSMD() {
-  spike1.classList.add("spikeMoveMD");
-  spike2.classList.add("spikeMoveMD");
-
-  console.log(levelSL);
-  checkSPM = true;
-}
-function sSAH() {
-  spike1.classList.add("spikeMoveAH");
-  spike2.classList.add("spikeMoveAH");
-
-  console.log(levelSL);
-  checkSPM = true;
-}
-if (gameOn) {
-  document.addEventListener("keyup", (event) => {
-    if (event.code === "Space") {
-      shirt.classList.add("shirtJ");
-      head.classList.add("headJ");
-      Lleg.classList.add("LlegJ");
-      Rleg.classList.add("RlegJ");
-      setTimeout(endJump, 2000);
-      console.log(spike.getBoundingClientRect().left);
-    }
-  });
-}
-setInterval(touchCheck, 10);
-function scoreUp() {
+function secondSpikeStart() {
   if (gameOn) {
-    score++;
-    scoreE.textContent = score;
-  }
-}
-function endJump() {
-  shirt.classList.remove("shirtJ");
-  head.classList.remove("headJ");
-  Lleg.classList.remove("LlegJ");
-  Rleg.classList.remove("RlegJ");
-}
-function touchCheck() {
-  if (gameOn) {
-    if (touches(Rleg, spike1) || touches(Rleg, spike2)) {
-      gameOn = false;
-      body.style.backgroundColor = "#FF0000";
-      playAgain.classList.remove("hidden");
-      if (score > highScore) {
-        console.log("Ho");
-        highScore = score;
-        highScoreE.textContent = scoreE.textContent;
-        setTimeout(resetScore, 100);
-      } else {
-        setTimeout(resetScore, 100);
-      }
+    if (Math.trunc(Math.random() * 7) + 1 === 5) {
+      clearInterval(secondSpikeStart, 500);
+      start(spike2);
     }
-  }
-}
-function playAG() {
-  if (!gameOn) {
-    body.addEventListener("click", startGame);
-  }
-}
-function startGame() {
-  console.log(levelSL);
-
-  playAgain.classList.add("hidden");
-  body.style.backgroundColor = "#00FFFF";
-  gameOn = true;
-  if (levelSL === 1) {
-    spike1.classList.add("spikeMoveEZ");
-    spike2.classList.add("spikeMoveEZ");
-  } else if (levelSL === 2) {
-    spike1.classList.add("spikeMoveMD");
-    spike2.classList.add("spikeMoveMD");
   } else {
-    spike1.classList.add("spikeMoveAH");
-    spike2.classList.add("spikeMoveAH");
+    // spike2.classList.add("hidden");
   }
 }
-function resetScore() {
-  console.log("resetScore");
-  score = 0;
-  scoreE.textContent = 0;
-  spike1.classList.remove("spikeMoveEZ");
-  spike1.classList.remove("spikeMoveMD");
-  spike1.classList.remove("spikeMoveAH");
-  spike2.classList.remove("spikeMoveEZ");
-  spike2.classList.remove("spikeMoveMD");
-  spike2.classList.remove("spikeMoveAH");
-  levelSL = Math.trunc(Math.random() * 3) + 1;
-  setInterval(playAG, 10);
+function firstSpikeStart() {
+  if (gameOn) {
+    if (Math.trunc(Math.random() * 7) + 1 === 5) {
+      clearInterval(firstSpikeStart, 500);
+      start(spike1);
+    }
+  } else {
+    // spike1.classList.add("hidden");
+  }
 }
-function touches(f, l) {
-  let touch1 = f.getBoundingClientRect();
-  let touch2 = l.getBoundingClientRect();
-  if (
-    touch1.x <= touch2.x &&
-    touch2.x <= touch1.x + 10 &&
-    touch1.y <= touch2.y + 20 &&
-    touch1.y + 15 >= touch2.y
-  ) {
-    return true;
+function checkSSV() {
+  if (stopSV) {
+    stopS();
+  }
+}
+
+setInterval(firstSpikeStart, 500);
+setInterval(secondSpikeStart, 500);
+setInterval(checkSSV, 10);
+setInterval(middleHide, 1);
+function start(spike) {
+  console.log(spike.classList);
+  let levelSL = Math.trunc(Math.random() * 3) + 1;
+
+  let checkSPM = true;
+  setInterval(spikeSM, 10);
+  spike.classList.remove("spikeMoveEZ");
+  if (levelSL === 1) {
+    setInterval(scoreUp, 9000);
+    spike.classList.add("spikeMoveEZ");
+  } else if (levelSL === 2) {
+    spike.classList.add("spikeMoveMD");
+    setInterval(scoreUp, 3600);
+  } else {
+    spike.classList.add("spikeMoveAH");
+    setInterval(scoreUp, 2100);
+  }
+  function spikeSM() {
+    if (checkSPM) {
+      if (spike.getBoundingClientRect().left < 0) {
+        stopS();
+        levelSL = Math.trunc(Math.random() * 3) + 1;
+        if (levelSL === 1) {
+          clearInterval(scoreUp);
+          sSEZ();
+        } else if (levelSL === 2) {
+          clearInterval(scoreUp);
+          sSMD();
+        } else {
+          clearInterval(scoreUp);
+          sSAH();
+        }
+        checkSPM = false;
+      }
+    }
+  }
+  function sSEZ() {
+    spike.classList.add("spikeMoveEZ");
+
+    checkSPM = true;
+  }
+  function sSMD() {
+    spike.classList.add("spikeMoveMD");
+
+    checkSPM = true;
+  }
+  function sSAH() {
+    spike.classList.add("spikeMoveAH");
+
+    checkSPM = true;
+  }
+  if (gameOn) {
+    document.addEventListener("keyup", (event) => {
+      if (event.code === "Space") {
+        shirt.classList.add("shirtJ");
+        head.classList.add("headJ");
+        Lleg.classList.add("LlegJ");
+        Rleg.classList.add("RlegJ");
+        setTimeout(endJump, 1000);
+      }
+    });
+  }
+  setInterval(touchCheck, 10);
+  function scoreUp() {
+    if (gameOn) {
+      score++;
+      scoreE.textContent = score;
+    }
+  }
+  function endJump() {
+    shirt.classList.remove("shirtJ");
+    head.classList.remove("headJ");
+    Lleg.classList.remove("LlegJ");
+    Rleg.classList.remove("RlegJ");
+  }
+  function touchCheck() {
+    if (gameOn) {
+      if (touches(Rleg, spike)) {
+        gameOn = false;
+        body.style.backgroundColor = "#FF0000";
+
+        playAgain.classList.remove("hidden");
+        spike1.classList.add("hidden");
+        spike2.classList.add("hidden");
+        for (var i = 0; i < 1000; i++) {}
+        if (score > highScore) {
+          highScore = score;
+          highScoreE.textContent = scoreE.textContent;
+
+          setTimeout(resetScore, 100);
+        } else {
+          setTimeout(resetScore, 100);
+        }
+      }
+    }
+  }
+  function playAG() {
+    if (!gameOn) {
+      body.addEventListener("click", startGame);
+    }
+  }
+  function startGame() {
+    spike.classList.remove("hidden");
+    stopSV = false;
+    playAgain.classList.add("hidden");
+    body.style.backgroundColor = "#00FFFF";
+    gameOn = true;
+    if (levelSL === 1) {
+      spike.classList.add("spikeMoveEZ");
+    } else if (levelSL === 2) {
+      spike.classList.add("spikeMoveMD");
+    } else {
+      spike.classList.add("spikeMoveAH");
+    }
+  }
+  function resetScore() {
+    score = 0;
+    scoreE.textContent = 0;
+    stopSV = true;
+    levelSL = Math.trunc(Math.random() * 3) + 1;
+    setInterval(playAG, 10);
+  }
+
+  function touches(f, l) {
+    let touch1 = f.getBoundingClientRect();
+    let touch2 = l.getBoundingClientRect();
+    if (
+      touch1.x <= touch2.x &&
+      touch2.x <= touch1.x + 10 &&
+      touch1.y <= touch2.y + 20 &&
+      touch1.y + 15 >= touch2.y
+    ) {
+      return true;
+    }
   }
 }
